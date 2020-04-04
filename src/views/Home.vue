@@ -1,17 +1,19 @@
 <template>
   <div class="home">
-    <button class="btn btn-primary">Button</button>
+    <hero/>
+    <div class="jumbotron"></div>
+    
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-
+import hero from '../components/hero'
 
 export default {
   name: 'Home',
   components: {
-    
+     hero
   }
 }
 </script>

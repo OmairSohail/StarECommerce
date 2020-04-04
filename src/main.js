@@ -6,6 +6,10 @@ import './assets/app.css'
 
 Vue.config.productionTip = false
 
+
+
+Vue.component('navbarcomponent',require('./components/navBar.vue').default);
+
 new Vue({
   router,
   store,

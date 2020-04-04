@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <navbarcomponent/>
     <hero/>
     <div class="jumbotron"></div>
     

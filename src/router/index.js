@@ -5,6 +5,7 @@ import admin from '../views/admin.vue'
 import overview from '../components/Overview.vue'
 import products from '../components/Products.vue'
 import orders from '../components/Orders.vue'
+import firebase from '../firebase'    
 
 Vue.use(VueRouter)
 
@@ -18,6 +19,7 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: admin,
+    meta: { requiresAuth: true },
     children:[
       {
         path:'overview',
@@ -49,5 +51,20 @@ const routes = [
 const router = new VueRouter({
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
+  const currentUser = firebase.auth().currentUser;
+
+  if(requiresAuth && !currentUser)
+  {
+    next('/')
+  } else if(requiresAuth && currentUser){
+    next()
+  } else{
+    next()
+  }
+})
+
 
 export default router

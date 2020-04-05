@@ -21,13 +21,13 @@
 
      <form class="form-inline ml-auto my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#exampleModalCenter">Get Started</button>
+      <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#signmodel">Get Started</button>
     </form>
   </div>
 </nav>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="signmodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -47,64 +47,10 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-   <form action="">
-       <div class="container mt-2">
-         <div class="form-group">
-              <label for="exampleFormControlInput1">Email:</label>
-              <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Your Email">
-            </div>
-            <div class="form-group">
-              <label for="exampleFormControlInput1">Password:</label>
-              <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Your Password">
-            </div>
-            <div class="form-row">
-              <div class="col">
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck1">
-                  <label class="custom-control-label" for="customCheck1">Remember me ?</label>
-                </div>
-              </div>
-              <div class="col">
-                <router-link to="/signup">Dont Have Account ?</router-link>
-              </div>
-            </div>
-            <div class="form-group">
-              <button class="btn btn-primary mt-2 btn-block">Login</button>
-            </div>
-   </div> 
-    </form> 
+   <loginform/>
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-    <form action="">
-     <div class="container mt-2">
-            <div class="form-group">
-              <label for="username">Username:</label>
-              <input type="text" class="form-control" id="username" placeholder="Username">
-            </div>
-             <div class="form-group">
-              <label for="email">Email:</label>
-              <input type="email" class="form-control" id="email" placeholder="Email">
-            </div>
-            <div class="form-group">
-              <label for="password">Password:</label>
-              <input type="password" class="form-control" id="password" placeholder="Password">
-            </div>
-          
-            <div class="form-group">
-              <label for="confirmpassword">Confirm Password:</label>
-              <input type="password" class="form-control" id="confirmpassword" placeholder="Confirm Password">
-            </div>
-            <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="termsandconditions">
-                  <label class="custom-control-label" for="termsandconditions">I Agree To The Terms And Conditions</label>
-            </div>
-            <div class="form-group">
-              <button class="btn btn-primary mt-2 btn-block">SignUp</button>
-            </div>
-   </div>
-    </form>
-     
-    
+    <signupform/>
   </div>
 </div>
         <!-- <div class="container">
@@ -138,8 +84,14 @@
 </template>
 
 <script>
+import loginform from '../components/loginform'
+import signupform from '../components/signupform'
+
 export default {
-   name:'navbarcomponent'
+   name:'navbarcomponent',
+   components:{
+     loginform,signupform
+   }
 }
 </script>
 

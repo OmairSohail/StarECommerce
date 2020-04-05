@@ -3,7 +3,12 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './assets/app.css'
+import jQuery from 'jquery';
+import 'popper.js'
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
+window.$ = window.jQuery = jQuery;
 Vue.config.productionTip = false
 
 

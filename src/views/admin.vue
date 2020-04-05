@@ -231,11 +231,17 @@
 </template>
 
 <script>
+import firebase from '../firebase'
 export default {
    name:'admin',
    methods:{
        logout:function(){
-           console.log('logout')
+           firebase.auth()
+           .signOut()
+           .then(()=>{
+              this.$router.replace('/');
+           })
+           .catch(err => console.log(err.message))
        }
    }
 

@@ -2,20 +2,22 @@
   <div class="home">
     <navbarcomponent/>
     <hero/>
-    <div class="jumbotron"></div>
-    
-    
+    <benefits/>
+    <productssection/>
+    <corona/>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import hero from '../components/hero'
+import benefits from '../sections/benefits'
+import productssection from '../sections/products'
+import corona from '../sections/corona'
 
 export default {
   name: 'Home',
   components: {
-     hero
+     hero,benefits,productssection,corona
   }
 }
 </script>

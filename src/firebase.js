@@ -1,6 +1,6 @@
 // ALL FIREBASE SERVICES WILL BE CODED HERE 
 import firebase from 'firebase'
-
+require("firebase/firestore");
 
 
 // FIREBASE INITIALIZATION 
@@ -20,4 +20,8 @@ if(!firebase.apps.length){
     firebase.initializeApp(firebaseConfig);
 }
 
+export const firestore = firebase.firestore();
+
+
+// EXPORTING A FIREBASE OBJECT
 export default firebase;

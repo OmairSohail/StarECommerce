@@ -1,14 +1,14 @@
 <template>
-  <div class="products">
+  <div class="overview">
      <div class="container">
-         <h2>Products</h2>
+         <div class="h2">Overview Component</div>
      </div>
   </div>
 </template>
 
 <script>
 export default {
-    name:'products'
+   name:'overview'
 }
 </script>
 

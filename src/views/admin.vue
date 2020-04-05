@@ -10,7 +10,7 @@
                 <!-- sidebar-header  -->
                 <div class="sidebar-item sidebar-header d-flex flex-nowrap">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="img/user.jpg" alt="User picture">
+                        <img class="img-responsive img-rounded" src="../assets/user.png" alt="User picture">
                     </div>
                     <div class="user-info">
                         <span class="user-name">M.Omair
@@ -43,119 +43,42 @@
                             <span>General</span>
                         </li>
                         <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="fa fa-tachometer-alt"></i>
-                                <span class="menu-text">Dashboard</span>
-                                <span class="badge badge-pill badge-warning">New</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="#">Dashboard 1
-                                            <span class="badge badge-pill badge-success">Pro</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Dashboard 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Dashboard 3</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="fa fa-shopping-cart"></i>
-                                <span class="menu-text">E-commerce</span>
-                                <span class="badge badge-pill badge-danger">3</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="#">Products
-
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Orders</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Credit cart</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="far fa-gem"></i>
-                                <span class="menu-text">Components</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="#">General</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Panels</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Tables</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Icons</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Forms</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
+                            <router-link to="/admin/overview">
                                 <i class="fa fa-chart-line"></i>
-                                <span class="menu-text">Charts</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="#">Pie chart</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Line chart</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Bar chart</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Histogram</a>
-                                    </li>
-                                </ul>
-                            </div>
+                                <span class="menu-text">Overview</span>
+                                <span class="badge badge-pill badge-warning">New</span>
+                            </router-link>
+                            
                         </li>
                         <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="fa fa-globe"></i>
-                                <span class="menu-text">Maps</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="#">Google maps</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Open street map</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <router-link to="/admin/products">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span class="menu-text">Products</span>
+                                <span class="badge badge-pill badge-danger">3</span>
+                            </router-link>
+                            
                         </li>
+                        <li class="sidebar-dropdown">
+                            <router-link to="/admin/orders">
+                                <i class="far fa-gem"></i>
+                                <span class="menu-text">Orders</span>
+                            </router-link>
+                            
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a v-on:click="logout">
+                                <i class="fa fa-power-off"></i>
+                                <span class="menu-text">Logout</span>
+                            </a>
+                        </li>
+                        
                        
                     </ul>
                 </div>
                 <!-- sidebar-menu  -->
             </div>
             <!-- sidebar-footer  -->
-            <div class="sidebar-footer">
+            <!-- <div class="sidebar-footer">
                 <div class="dropdown">
 
                     <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -295,22 +218,12 @@
                         <i class="fas fa-ellipsis-h"></i>
                     </a>
                 </div>
-            </div>
+            </div> -->
         </nav>
         <!-- page-content  -->
         <main class="page-content pt-2">
             <div id="overlay" class="overlay"></div>
-            <div class="container-fluid p-5">
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <h2>Welcome Admin...</h2>
-                        <p>This is a admin dashboard.</p>
-
-                    </div>
-                </div>
-                <hr>
-               <!-- Work Here -->
-            </div>
+            <router-view/>
         </main>
         <!-- page-content" -->
   </div>
@@ -320,9 +233,10 @@
 <script>
 export default {
    name:'admin',
-   created(){
-       
-   
+   methods:{
+       logout:function(){
+           console.log('logout')
+       }
    }
 
 }

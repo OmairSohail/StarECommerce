@@ -1,14 +1,14 @@
 <template>
-  <div class="products">
+  <div class="orders">
      <div class="container">
-         <h2>Products</h2>
+         <h2>orders</h2>
      </div>
   </div>
 </template>
 
 <script>
 export default {
-    name:'products'
+    name:'orders'
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-      <form action="" @submit.prevent="login">
+      <form action="" @submit.prevent="login" @keyup.enter="login">
        <div class="container mt-2">
          <div class="form-group">
               <label for="loginemail">Email:</label>

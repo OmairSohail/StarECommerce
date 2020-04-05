@@ -54,6 +54,7 @@ export default {
                  this.password = '';
                  this.confirmpassword = '';
                  this.termscheck = false;
+                  $('#signmodel').modal('hide');
                  this.$router.replace('admin');
              })
              .catch(err => console.log(err.message))

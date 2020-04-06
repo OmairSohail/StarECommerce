@@ -13,6 +13,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Latest Men's Sneaker</h5>
                     <p class="card-text">$25.00</p>
+                    <button class="btn btn-success">Buy now</button>
                 </div>
              </div>
               <div class="card">
@@ -20,6 +21,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Red Women Purse</h5>
                     <p class="card-text">$35.00</p>
+                    <button class="btn btn-success">Buy now</button>
                 </div>
              </div>
               <div class="card">
@@ -27,6 +29,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Men's Stylish Watch</h5>
                     <p class="card-text">$45.00</p>
+                    <button class="btn btn-success">Buy now</button>
                 </div>
              </div>
          </div>

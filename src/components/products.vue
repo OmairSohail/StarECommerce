@@ -22,24 +22,64 @@
 
               <hr>
               <h2>Product List</h2>
-               <table class="table table-striped table-dark">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="p in productData" :key="p.product">
-      <td>{{p.product}}</td>
-      <td>{{p.price}}</td> 
-    </tr>
-  </tbody>
-</table>
+              <table class="table table-striped table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Edit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="p in productData" :key="p.data().id">
+                    <td>{{p.data().product}}</td>
+                    <td>{{p.data().price}}</td>
+                    <td>
+                      <button class="btn btn-sm btn-warning" @click="editProduct(p)">edit</button>
+                      <button class="btn btn-sm btn-danger" @click="removeProduct(p.id)">delete</button>
+                    </td>
+                     
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div class="col-lg-6"></div>
+            <div class="col-lg-6">
+              <img src="../assets/productmanage.svg" alt="">
+            </div>
+         </div>
+         <div class="row">
+
          </div>
      </div>
+
+
+     <!-- Modal -->
+      <div class="modal fade" id="editModel" tabindex="-1" role="dialog" aria-labelledby="editProductModel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editProductModel">Edit Product</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              
+                 <div class="form-group">
+                   <input type="text" class="form-control" placeholder="Enter A Product"  v-model="Product.product">
+                 </div>
+                 <div class="form-group">
+                   <input type="number" class="form-control" placeholder="Price" v-model="Product.price">
+                 </div>
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" @click="updateproduct">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
 </template>
 
@@ -54,7 +94,8 @@ export default {
         Product:{
           product:'',
           price:'',
-        }
+        },
+        activeItem:null
       }
     },
     created(){
@@ -62,6 +103,37 @@ export default {
 
     },
     methods:{
+      updateproduct:function(){
+         var docRef = db.collection("Products").doc(this.activeItem);
+
+          return washingtonRef.update({
+              capital: true
+          })
+          .then(function() {
+              console.log("Document successfully updated!");
+          })
+          .catch(function(error) {
+              // The document probably doesn't exist.
+              console.error("Error updating document: ", error);
+          });
+      },
+      editProduct(doc){
+        $('#editModel').modal("show");
+        this.Product = doc.data();
+        this.activeItem = doc.id;
+
+      },
+      removeProduct(docId){
+        if(confirm('are you sure ?')){
+         firestore.collection("Products").doc(`${docId}`).delete().then(function() {
+                alert("Document successfully deleted!");
+                
+            }).catch(function(error) {
+                alert("Error");
+                console.log("Error removing document: ", error);
+            });
+        }
+      },
       addproduct:function(){
         firestore.collection('Products')
         .add(this.Product)
@@ -69,7 +141,7 @@ export default {
            console.log(docRef.id);
            this.Product.name = '';
            this.Product.price = '';
-           this.loadData();
+           
         })
         .catch(err => console.log(err.message))
       },
@@ -77,7 +149,7 @@ export default {
          firestore.collection("Products").get().then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
               // doc.data() is never undefined for query doc snapshots
-              this.productData.push(doc.data());
+              this.productData.push(doc);
               
           });
       });

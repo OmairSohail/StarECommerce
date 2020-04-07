@@ -20,7 +20,7 @@ if(!firebase.apps.length){
     firebase.initializeApp(firebaseConfig);
 }
 
-export const firestore = firebase.firestore();
+export const fs = firebase.firestore();
 
 
 // EXPORTING A FIREBASE OBJECT

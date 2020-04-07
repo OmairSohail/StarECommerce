@@ -1,28 +1,23 @@
 <template>
   <div class="products">
      <div class="container">
-         <h2>Products</h2>
+         <div class="row ">
+            <div class="col-lg-4">
+              <h2>Products</h2>
          <hr>
+         <h4 class="text-muted">Get closer to your first sale by adding products, or import your existing product inventory.</h4>            
+            
+            </div>
+            <div class="col-lg-8">
+              <img src="../assets/productmanage.svg" alt="">
+            </div>
+         </div>
          <div class="row">
-            <div class="col-lg-6">
-              <h3>Add Products</h3>
-              <form action="" @submit.prevent="addproduct">
-                 <div class="form-group">
-                   <label for="product">Product:</label>
-                   <input type="text" class="form-control" placeholder="Enter A Product" name="product" v-model="Product.product">
-                 </div>
-                 <div class="form-group">
-                   <label for="price">Price:</label>
-                   <input type="number" class="form-control" placeholder="Price" name="price" v-model="Product.price">
-                 </div>
-                 <div class="form-group">
-                   <button class="btn btn-primary" type="submit">Add Product</button>
-                 </div>
-              </form>
-
-              <hr>
-              <h2>Product List</h2>
-              <table class="table table-striped table-dark">
+             <div class="container">
+                <hr>
+              <h2 class="inline">Product List <button class="btn btn-primary float-right" data-toggle="modal" data-target="#addProductModel">Add Product</button></h2>
+              
+              <!-- <table class="table table-striped table-dark">
                 <thead>
                   <tr>
                     <th scope="col">Name</th>
@@ -41,14 +36,8 @@
                      
                   </tr>
                 </tbody>
-              </table>
-            </div>
-            <div class="col-lg-6">
-              <img src="../assets/productmanage.svg" alt="">
-            </div>
-         </div>
-         <div class="row">
-
+              </table> -->
+             </div>
          </div>
      </div>
 
@@ -64,14 +53,19 @@
               </button>
             </div>
             <div class="modal-body">
-              
-                 <div class="form-group">
+              <div class="form-row">
+                 <div class="col">
+                   
                    <input type="text" class="form-control" placeholder="Enter A Product"  v-model="Product.product">
-                 </div>
-                 <div class="form-group">
+                
+                
+               </div>
+                <div class="col-lg-6">
+                  
                    <input type="number" class="form-control" placeholder="Price" v-model="Product.price">
-                 </div>
-              
+                
+                </div>
+              </div>      
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -80,84 +74,94 @@
           </div>
         </div>
       </div>
+     <!-- Add Product Model -->
+       <div class="modal fade" id="addProductModel" tabindex="-1" role="dialog" aria-labelledby="addProductmodel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addProductmodel">Product</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="container">
+                       <div class="row">
+                    <div class="col-12">
+                      <input type="text" class="form-control" placeholder="Product Name" v-model="Product.name">
+                      <textarea class="form-control mt-3" id="exampleFormControlTextarea1" rows="10" placeholder="Product Description" v-model="Product.description"></textarea>
+                    </div>
+                    <div class="col-12">
+                      <h2 class="text-muted mt-3">Product Details</h2>
+                      <input type="text" class="form-control" placeholder="Product Price" v-model="Product.price">
+                      <input type="text" class="form-control mt-3" placeholder="Product tags" v-model="Product.tags">
+                      <div class="custom-file mt-3">
+                        <input type="file" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+                 
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" @click="addproduct">Add Product</button>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
 </template>
 
 <script>
-import firebase,{firestore} from '../firebase'
+import firebase,{fs} from '../firebase'
 export default {
     name:'products',
-    data(){
+    firestore(){
       return{
-        
+        Products:firestore.collection('Products')
+      }
+    },
+    data(){
+      return{      
         productData:[],
         Product:{
-          product:'',
+          name:'',
+          description:'',
           price:'',
+          tags:'',
+          img:''
         },
         activeItem:null
       }
     },
     created(){
-      this.loadData()
+      this.loadData();
 
     },
     methods:{
       updateproduct:function(){
-         var docRef = db.collection("Products").doc(this.activeItem);
-
-          return washingtonRef.update({
-              capital: true
-          })
-          .then(function() {
-              console.log("Document successfully updated!");
-          })
-          .catch(function(error) {
-              // The document probably doesn't exist.
-              console.error("Error updating document: ", error);
-          });
+        
       },
       editProduct(doc){
         $('#editModel').modal("show");
-        this.Product = doc.data();
-        this.activeItem = doc.id;
+        
 
       },
       removeProduct(docId){
         if(confirm('are you sure ?')){
-         firestore.collection("Products").doc(`${docId}`).delete().then(function() {
-                alert("Document successfully deleted!");
-                
-            }).catch(function(error) {
-                alert("Error");
-                console.log("Error removing document: ", error);
-            });
+        
         }
       },
-      addproduct:function(){
-        firestore.collection('Products')
-        .add(this.Product)
-        .then((docRef)=>{
-           console.log(docRef.id);
-           this.Product.name = '';
-           this.Product.price = '';
-           
-        })
-        .catch(err => console.log(err.message))
+      addproduct:() => {
+        this.$firestore.Products.add(this.Product);
       },
-      loadData(){
-         firestore.collection("Products").get().then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-              // doc.data() is never undefined for query doc snapshots
-              this.productData.push(doc);
-              
-          });
-      });
-      },
-      resetData(){
-        // Object.assign(this.$data,this.$options.data.apply(this))
-      }
-    }
+     
+    },
+    
+    
 }
 </script>
 

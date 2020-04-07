@@ -5,7 +5,7 @@
             <div class="sidebar-content">
                 <!-- sidebar-brand  -->
                 <div class="sidebar-item sidebar-brand">
-                    <a href="#">Admin Dashboard</a>
+                    <a href="#">Star-Electronics</a>
                 </div>
                 <!-- sidebar-header  -->
                 <div class="sidebar-item sidebar-header d-flex flex-nowrap">
@@ -13,8 +13,8 @@
                         <img class="img-responsive img-rounded" src="../assets/user.png" alt="User picture">
                     </div>
                     <div class="user-info">
-                        <span class="user-name">M.Omair
-                            <strong>Sohail</strong>
+                        <span class="user-name">
+                            <strong>{{useremail}}</strong>
                         </span>
                         <span class="user-role">Administrator</span>
                         <span class="user-status">
@@ -234,6 +234,11 @@
 import firebase from '../firebase'
 export default {
    name:'admin',
+   data(){
+       return{
+           useremail:this.$store.state.user.email
+       }
+   },
    methods:{
        logout:function(){
            firebase.auth()

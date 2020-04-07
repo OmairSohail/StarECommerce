@@ -121,7 +121,7 @@ export default {
     name:'products',
     firestore(){
       return{
-        Products:firestore.collection('Products')
+        Products:fs.collection('Products')
       }
     },
     data(){
@@ -138,7 +138,7 @@ export default {
       }
     },
     created(){
-      this.loadData();
+     
 
     },
     methods:{
@@ -155,8 +155,9 @@ export default {
         
         }
       },
-      addproduct:() => {
+      addproduct(){
         this.$firestore.Products.add(this.Product);
+        $('#addProductModel').modal("hide");
       },
      
     },

@@ -22,6 +22,7 @@
      <form class="form-inline ml-auto my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#signmodel" :class="{'d-none':isLoggedIn}">Get Started</button>
+      <router-link to="/admin" v-if="isLoggedIn" class="btn btn-success">Go To Dashboard</router-link>
     </form>
   </div>
 </nav>

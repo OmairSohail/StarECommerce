@@ -9,26 +9,26 @@
 
          <div class="container products-container mt-4">
              <div class="card">
-                <img src="https://colorlib.com/preview/theme/eiser/img/product/feature-product/f-p-1.jpg" class="card-img-top">
+                <img src="https://www.theproteinfactory.pk/wp-content/uploads/2016/08/Whey-80-2.png" class="card-img-top">
                 <div class="card-body">
-                    <h5 class="card-title">Latest Men's Sneaker</h5>
+                    <h5 class="card-title">Whey Protein Powder 1 kg</h5>
                     <p class="card-text">$25.00</p>
                     <button class="btn btn-success">Buy now</button>
                 </div>
              </div>
               <div class="card">
-                <img src="https://colorlib.com/preview/theme/eiser/img/product/feature-product/f-p-2.jpg" class="card-img-top">
+                <img src="https://www.theproteinfactory.pk/wp-content/uploads/2016/08/peanut-butter.png" class="card-img-top">
                 <div class="card-body">
-                    <h5 class="card-title">Red Women Purse</h5>
+                    <h5 class="card-title">Peanut Butter Smooth 1kg</h5>
                     <p class="card-text">$35.00</p>
                     <button class="btn btn-success">Buy now</button>
                 </div>
              </div>
               <div class="card">
-                <img src="https://colorlib.com/preview/theme/eiser/img/product/feature-product/f-p-3.jpg" class="card-img-top">
+                <img src="https://www.theproteinfactory.pk/wp-content/uploads/2018/06/Protein-Brownies-600x600.png" class="card-img-top">
                 <div class="card-body">
-                    <h5 class="card-title">Men's Stylish Watch</h5>
-                    <p class="card-text">$45.00</p>
+                    <h5 class="card-title">Protein Brownies</h5>
+                    <p class="card-text">$35.00</p>
                     <button class="btn btn-success">Buy now</button>
                 </div>
              </div>

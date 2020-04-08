@@ -13,7 +13,7 @@ export default {
 <style>
 .corona{
     height:100vh;
-    background-image:url('../assets/corona.jpg');
+    background-image:url('../assets/b1.jpg');
     background-size:cover;
 }
 </style>

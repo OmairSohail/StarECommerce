@@ -139,7 +139,7 @@
                         <span class="badge badge-primary p-2 mr-1" v-for="tag in Product.tags" :key="tag">{{tag}} <i class="fas fa-times-circle" @click="removeTag(tag)"></i></span>
                       </div>
                       <div class="custom-file mt-3">
-                        <input type="file" class="custom-file-input" id="customFile">
+                        <input type="file" class="custom-file-input" id="customFile" v-on:change="uploadImage($event)">
                         <label class="custom-file-label" for="customFile">Choose file</label>
                       </div>
                     </div>
@@ -161,7 +161,7 @@
 </template>
 
 <script>
-import firebase,{fs} from '../firebase'
+import fb,{fs} from '../firebase'
 import { VueEditor } from "vue2-editor";
 
 export default {
@@ -235,6 +235,7 @@ export default {
       addProduct(){
        
         this.$firestore.Products.add(this.Product);
+       
         $('#addProductModel').modal("hide");
         Toast.fire({
               icon: 'success',
@@ -267,6 +268,24 @@ export default {
       removeTagForEdit(tage){
         let i = this.ProductEdit.tags.indexOf(tage);
         this.ProductEdit.tags.splice(i,1);
+      },
+      uploadImage(e){
+          
+          let file = e.target.files[0];
+          const storageRef = fb.storage().ref('ProductsImage/'+file.name);
+          const uploadTask = storageRef.put(file);
+           
+           uploadTask.on('state_changed',(snapshot) => {
+               }, function(error) {
+                  console.log(error)
+                },() => {
+                  // Handle successful uploads on complete
+                  // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                  uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                  this.Product.img = downloadURL;
+                });
+           });
+          
       }
      
     },

@@ -1,6 +1,8 @@
 // ALL FIREBASE SERVICES WILL BE CODED HERE 
-import firebase from 'firebase'
-require("firebase/firestore");
+import fb from '@firebase/app';
+import "firebase/firestore";
+import 'firebase/firebase-auth';
+import 'firebase/storage';
 
 
 // FIREBASE INITIALIZATION 
@@ -16,12 +18,11 @@ const firebaseConfig = {
     measurementId: "G-8WEK3QXRJL"
   };
 
-if(!firebase.apps.length){
-    firebase.initializeApp(firebaseConfig);
+if(!fb.apps.length){
+  fb.initializeApp(firebaseConfig);
 }
+   
+export const fs = fb.firestore();
 
-export const fs = firebase.firestore();
+export default fb;
 
-
-// EXPORTING A FIREBASE OBJECT
-export default firebase;

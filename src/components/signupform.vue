@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import firebase from '../firebase'
+import fb from '../firebase'
 export default {
      name:'signupform',
      data(){
@@ -46,7 +46,7 @@ export default {
      },
      methods:{
          signup:function(){
-             firebase.auth()
+             fb.auth()
              .createUserWithEmailAndPassword(this.email,this.password)
              .then(()=>{
                  this.username = '';

@@ -231,7 +231,7 @@
 </template>
 
 <script>
-import firebase from '../firebase'
+import {fb} from '../firebase'
 export default {
    name:'admin',
    data(){
@@ -241,7 +241,7 @@ export default {
    },
    methods:{
        logout:function(){
-           firebase.auth()
+           fb.auth()
            .signOut()
            .then(()=>{
               this.$router.replace('/');

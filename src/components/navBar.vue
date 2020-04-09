@@ -87,7 +87,7 @@
 <script>
 import loginform from '../components/loginform'
 import signupform from '../components/signupform'
-import firebase from '../firebase'
+import fb from '../firebase'
 export default {
    name:'navbarcomponent',
    data(){
@@ -96,7 +96,7 @@ export default {
      }
    },
    created(){
-       firebase.auth().onAuthStateChanged((user)=>{
+       fb.auth().onAuthStateChanged((user)=>{
            if(user){
              this.isLoggedIn = true
            }else{

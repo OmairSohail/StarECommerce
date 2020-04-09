@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import firebase from './firebase'
+import fb from './firebase'
 import {mapActions} from 'vuex'
 
 export default {
@@ -16,12 +16,12 @@ export default {
        ...mapActions(['createUser','deleteUser'])
      },
      created(){
-       firebase.auth().onAuthStateChanged((user)=>{
+       fb.auth().onAuthStateChanged((user)=>{
           if(user && this.$store.state.user == ''){
               const userpayload = {
-                 id:firebase.auth().currentUser.uid,
-                 email:firebase.auth().currentUser.email,
-                 name:firebase.auth().currentUser.displayName
+                 id:fb.auth().currentUser.uid,
+                 email:fb.auth().currentUser.email,
+                 name:fb.auth().currentUser.displayName
               }
 
               this.createUser(userpayload);

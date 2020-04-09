@@ -84,12 +84,17 @@
                        <div class="row">
                     <div class="col-12">
                       <input type="text" class="form-control" placeholder="Product Name" v-model="ProductEdit.name">
-                      <textarea class="form-control mt-3" id="exampleFormControlTextarea1" rows="10" placeholder="Product Description" v-model="ProductEdit.description"></textarea>
+                      <div class="mt-3">
+                        <vue-editor v-model="ProductEdit.description"></vue-editor>
+                      </div>
                     </div>
                     <div class="col-12">
                       <h2 class="text-muted mt-3">Product Details</h2>
                       <input type="text" class="form-control" placeholder="Product Price" v-model="ProductEdit.price">
-                      <input type="text" class="form-control mt-3" placeholder="Product tags" v-model="ProductEdit.tags">
+                      <input type="text" class="form-control mt-3" placeholder="Product tags" v-model="tagforedit" v-on:keyup.188="addTagsForEdit()">
+                       <div class="mt-2">
+                        <span class="badge badge-primary p-2 mr-1" v-for="tage in ProductEdit.tags" :key="tage">{{tage}} <i class="fas fa-times-circle" @click="removeTagForEdit(tage)"></i></span>
+                      </div>
                       <div class="custom-file mt-3">
                         <input type="file" class="custom-file-input" id="customFile">
                         <label class="custom-file-label" for="customFile">Choose file</label>
@@ -122,12 +127,17 @@
                        <div class="row">
                     <div class="col-12">
                       <input type="text" class="form-control" placeholder="Product Name" v-model="Product.name">
-                      <textarea class="form-control mt-3" id="exampleFormControlTextarea1" rows="10" placeholder="Product Description" v-model="Product.description"></textarea>
+                      <div class="mt-3">
+                        <vue-editor v-model="Product.description"></vue-editor>
+                      </div>
                     </div>
                     <div class="col-12">
                       <h2 class="text-muted mt-3">Product Details</h2>
                       <input type="text" class="form-control" placeholder="Product Price" v-model="Product.price">
-                      <input type="text" class="form-control mt-3" placeholder="Product tags" v-model="Product.tags">
+                      <input type="text" class="form-control mt-3" placeholder="Product tags" v-model="Tag" v-on:keyup.188="addTags()">
+                      <div class="mt-2">
+                        <span class="badge badge-primary p-2 mr-1" v-for="tag in Product.tags" :key="tag">{{tag}} <i class="fas fa-times-circle" @click="removeTag(tag)"></i></span>
+                      </div>
                       <div class="custom-file mt-3">
                         <input type="file" class="custom-file-input" id="customFile">
                         <label class="custom-file-label" for="customFile">Choose file</label>
@@ -152,22 +162,29 @@
 
 <script>
 import firebase,{fs} from '../firebase'
+import { VueEditor } from "vue2-editor";
+
 export default {
     name:'products',
+    components:{
+      VueEditor
+    },
     firestore(){
       return{
         Products:fs.collection('Products')
       }
     },
     data(){
-      return{      
+      return{    
+        Tag:'',  
+        tagforedit:'',
         Products:[],
         ProductEdit:[],
         Product:{
           name:'',
           description:'',
           price:'',
-          tags:'',
+          tags:[],
           img:'',
           createdAt: new Date().toDateString()
         },
@@ -234,6 +251,22 @@ export default {
       },
       openModel(){    
         $('#addProductModel').modal("show");
+      },
+      addTags(){
+         this.Product.tags.unshift(this.Tag); 
+         this.Tag = '';
+      },
+      addTagsForEdit(){
+         this.ProductEdit.tags.unshift(this.tagforedit); 
+         this.tagforedit = '';
+      },
+      removeTag(tag){
+        let i = this.Product.tags.indexOf(tag);
+        this.Product.tags.splice(i,1);
+      },
+      removeTagForEdit(tag){
+        let i = this.ProductEdit.tags.indexOf(tag);
+        this.ProductEdit.tags.splice(i,1);
       }
      
     },

@@ -264,8 +264,8 @@ export default {
         let i = this.Product.tags.indexOf(tag);
         this.Product.tags.splice(i,1);
       },
-      removeTagForEdit(tag){
-        let i = this.ProductEdit.tags.indexOf(tag);
+      removeTagForEdit(tage){
+        let i = this.ProductEdit.tags.indexOf(tage);
         this.ProductEdit.tags.splice(i,1);
       }
      

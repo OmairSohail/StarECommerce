@@ -9,6 +9,7 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import VueFirestore from 'vue-firestore'
 import Swal from 'sweetalert2'
+import fb,{fs} from './firebase'
 
 window.$ = window.jQuery = jQuery;
 
@@ -26,7 +27,33 @@ window.Toast = Swal.mixin({
   }
 })
 
-
+// FIREBASE STATE CHANGE 
+fb.auth().onAuthStateChanged((user)=>{
+  if(user && store.state.user == ''){
+    let id = fb.auth().currentUser.uid;
+    var docRef = fs.collection("Profiles").doc(id);
+     
+    docRef.get().then((doc) => {
+        if (doc.exists) {
+            const userPayload = {
+               id:doc.data().id,
+               name:doc.data().username,
+               email:doc.data().email,
+               profileImg:doc.data().profileImg 
+            }
+            store.dispatch('createUser',userPayload)
+            console.log("Document data:", doc.data());
+        } else {
+                console.log("No such document!");
+        }
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });     
+     
+  }else{
+     store.dispatch('deleteUser');
+  }
+})
 
 
 Vue.config.productionTip = false

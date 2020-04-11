@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import admin from '../views/admin.vue'
 import overview from '../components/Overview.vue'
+import profile from '../components/Profile.vue'
 import products from '../components/Products.vue'
 import orders from '../components/Orders.vue'
 import firebase from '../firebase'    
@@ -25,6 +26,11 @@ const routes = [
         path:'overview',
         name:'overview',
         component:overview
+      },
+      {
+        path:'profile',
+        name:'profile',
+        component:profile
       },
       {
         path:'products',

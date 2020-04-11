@@ -10,13 +10,13 @@
                 <!-- sidebar-header  -->
                 <div class="sidebar-item sidebar-header d-flex flex-nowrap">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="../assets/user.png" alt="User picture">
+                        <img class="img-responsive img-rounded" :src="user.profileImg" alt="User picture">
                     </div>
                     <div class="user-info">
                         <span class="user-name">
-                            <strong>{{useremail}}</strong>
+                            <strong>{{user.name}}</strong>
                         </span>
-                        <span class="user-role">Administrator</span>
+                        <span class="user-role">{{user.email}}</span>
                         <span class="user-status">
                             <i class="fa fa-circle"></i>
                             <span>Online</span>
@@ -47,6 +47,14 @@
                                 <i class="fa fa-chart-line"></i>
                                 <span class="menu-text">Overview</span>
                                 <span class="badge badge-pill badge-warning">New</span>
+                            </router-link>
+                            
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <router-link to="/admin/profile">
+                                <i class="fas fa-user-circle"></i>
+                                <span class="menu-text">Profile</span>
+                                
                             </router-link>
                             
                         </li>
@@ -231,12 +239,17 @@
 </template>
 
 <script>
-import {fb} from '../firebase'
+import fb from '../firebase'
 export default {
    name:'admin',
    data(){
        return{
-           useremail:this.$store.state.user.email
+          
+       }
+   },
+   computed:{
+       user(){
+           return this.$store.state.user;
        }
    },
    methods:{

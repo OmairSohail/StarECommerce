@@ -96,7 +96,7 @@
                         <span class="badge badge-primary p-2 mr-1" v-for="tage in ProductEdit.tags" :key="tage">{{tage}} <i class="fas fa-times-circle" @click="removeTagForEdit(tage)"></i></span>
                       </div>
                       <div class="custom-file mt-3">
-                        <input type="file" class="custom-file-input" id="customFile">
+                        <input type="file" class="custom-file-input" id="customFile" v-on:change="uploadImageForEdit($event)">
                         <label class="custom-file-label" for="customFile">Choose file</label>
                       </div>
                     </div>
@@ -142,6 +142,7 @@
                         <input type="file" class="custom-file-input" id="customFile" v-on:change="uploadImage($event)">
                         <label class="custom-file-label" for="customFile">Choose file</label>
                       </div>
+                      
                     </div>
                   </div>
               </div>
@@ -244,13 +245,21 @@ export default {
             this.Product.name = "";
             this.Product.description = "";
             this.Product.price = "";
-            this.Product.tags = "";
+            this.Product.tags = [];
             this.Product.img = "";
             
             this.Product.createdAt = "";
             
       },
       openModel(){    
+        this.Product = {
+          name:'',
+          description:'',
+          price:'',
+          tags:[],
+          img:'',
+          createdAt: ''
+        };
         $('#addProductModel').modal("show");
       },
       addTags(){
@@ -283,6 +292,24 @@ export default {
                   // For instance, get the download URL: https://firebasestorage.googleapis.com/...
                   uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
                   this.Product.img = downloadURL;
+                });
+           });
+          
+      },
+       uploadImageForEdit(e){
+          
+          let file = e.target.files[0];
+          const storageRef = fb.storage().ref('ProductsImage/'+file.name);
+          const uploadTask = storageRef.put(file);
+           
+           uploadTask.on('state_changed',(snapshot) => {
+               }, function(error) {
+                  console.log(error)
+                },() => {
+                  // Handle successful uploads on complete
+                  // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                  uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                  this.ProductEdit.img = downloadURL;
                 });
            });
           

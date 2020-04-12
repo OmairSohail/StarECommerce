@@ -56,6 +56,18 @@ fb.auth().onAuthStateChanged((user)=>{
 })
 
 
+
+// Vue Carousel
+import VueCarousel from 'vue-carousel';
+Vue.use(VueCarousel);
+
+
+
+
+
+
+
+
 Vue.config.productionTip = false
 
 Vue.use(VueFirestore,{

@@ -5,6 +5,7 @@
     <benefits/>
     <productssection/>
     <corona/>
+    <footer/>
   </div>
 </template>
 

@@ -8,7 +8,7 @@
  
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-5">
-      <li class="nav-item active">
+      <li class="nav-item">
          <router-link to="/" class="nav-link">Home</router-link> 
      
       </li>
@@ -24,6 +24,36 @@
       <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#signmodel" :class="{'d-none':isLoggedIn}">Get Started</button>
       <router-link to="/admin" v-if="isLoggedIn" class="btn btn-success">Go To Dashboard</router-link>
     </form>
+    
+
+    <div class="dropdown dropleft">
+  <button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   <i class="fas fa-shopping-cart"></i> <span class="badge badge-light" v-if="productCount !== 0">{{productCount}}</span>
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <h5 class="dropdown-header"> <i class="fas fa-shopping-cart"></i> Your Cart </h5>
+      <div class="dropdown-item" v-for="c in Cart" :key="c.id">
+        <div class="media">
+          <img :src="c.img" class="mr-3 img-rounded" width="100px" height="70px">
+          <div class="media-body h6">
+            {{c.name}}
+            <br>
+           <span class="text-muted">{{c.price|currency}}</span>
+            <br>
+            <span class=""><i class="fas fa-trash-alt text-danger p-2" @click="removeItem(c.id)"></i></span>
+          </div>
+      </div>
+    </div>
+    <div class="dropdown-item disabled">
+        <div class="media">
+          <h5>Total : </h5>
+          <div class="media-body h6">
+           
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
   </div>
 </nav>
 
@@ -92,9 +122,20 @@ export default {
    name:'navbarcomponent',
    data(){
      return{
-       isLoggedIn:false
+       isLoggedIn:false,
+       price:null
      }
    },
+   computed:{
+     Cart(){
+      return this.$store.state.cart
+     },
+     productCount(){
+       return this.Cart.length
+     },
+    
+   },
+  
    created(){
        fb.auth().onAuthStateChanged((user)=>{
            if(user){
@@ -103,6 +144,11 @@ export default {
              this.isLoggedIn = false
            }
        })
+   },
+   methods:{
+     removeItem(id){
+           this.$store.commit('removeItem',id);   
+     }
    },
    components:{
      loginform,signupform

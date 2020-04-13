@@ -8,98 +8,30 @@
          </div>
 
          <div class="container products-container mt-4">
-             <carousel perPage="3" class="carousel" :navigationEnabled="true" :autoplay="false">
-                <slide>
+             <carousel class="carousel" :navigationEnabled="true" :autoplay="false">
+                <slide v-for="p in Products" :key="p.id">
                     <div class="card">
-                <img src="https://www.theproteinfactory.pk/wp-content/uploads/2016/08/Whey-80-2.png" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title">Whey Protein Powder 1 kg</h5>
-                    <p class="card-text">$25.00</p>
-                    <button class="btn btn-success">Buy now</button>
-                </div>
-             </div>
+                        <img :src="p.img" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">{{p.name}}</h5>
+                            <p class="card-text h3"><strong>{{p.price | currency}}</strong></p>
+                            <hr>
+                             <add-to-cart
+                            :product_name="p.name"
+                            :product_price="p.price"
+                            :product_id="p.id"
+                            :product_img="p.img"
+                            >
+                            </add-to-cart>
+                            <div class="mt-2">
+                            <span class="badge badge-primary p-2 m-1" v-for="tag in p.tags" :key="tag">{{tag}}</span>
+                            </div>
+                           
+                        </div>
+                     </div>
                 </slide>
-                <slide>
-                    <div class="card">
-                <img src="https://www.theproteinfactory.pk/wp-content/uploads/2016/08/peanut-butter.png" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title">Peanut Butter Smooth 1kg</h5>
-                    <p class="card-text">$35.00</p>
-                    <button class="btn btn-success">Buy now</button>
-                </div>
-             </div>
-                </slide>
-                 <slide>
-                      <div class="card">
-                        <img src="https://www.theproteinfactory.pk/wp-content/uploads/2018/06/Protein-Brownies-600x600.png" class="card-img-top">
-                        <div class="card-body">
-                        <h5 class="card-title">Protein Brownies</h5>
-                        <p class="card-text">$35.00</p>
-                        <button class="btn btn-success">Buy now</button>
-                        </div>
-                     </div>
-                 </slide>
-                  <slide>
-                      <div class="card">
-                        <img src="https://www.optimumnutrition.com/sites/g/files/mrktmf206/files/styles/product_lp_thumb/public/GS-ISOLATE.jpg?itok=X1CvfdnU" class="card-img-top">
-                        <div class="card-body">
-                        <h5 class="card-title">SUPER MASS GAINER IS FORMULATED FOR ONE THING: MASSIVE GAINS</h5>
-                        <p class="card-text">$35.00</p>
-                        <button class="btn btn-success">Buy now</button>
-                        </div>
-                     </div>
-                 </slide>
-                  <slide>
-                      <div class="card">
-                        <img src="https://www.optimumnutrition.com/sites/g/files/mrktmf206/files/styles/product_lp_thumb/public/GoldStandardWheyProtein.jpg?itok=g-zzazTW" class="card-img-top">
-                        <div class="card-body">
-                        <h5 class="card-title">ELITE 100% WHEY</h5>
-                        <p class="card-text">$35.00</p>
-                        <button class="btn btn-success">Buy now</button>
-                        </div>
-                     </div>
-                 </slide>
-                 <slide>
-                      <div class="card">
-                        <img src="https://www.optimumnutrition.com/sites/g/files/mrktmf206/files/styles/product_lp_thumb/public/gold-standard-gainer-6443.jpg?itok=PaXaZOwr" class="card-img-top">
-                        <div class="card-body">
-                        <h5 class="card-title">WHEY PROTEIN ISOLATE POWDER</h5>
-                        <p class="card-text">$35.00</p>
-                        <button class="btn btn-success">Buy now</button>
-                        </div>
-                     </div>
-                 </slide>
-                 <slide>
-                      <div class="card">
-                        <img src="https://www.optimumnutrition.com/sites/g/files/mrktmf206/files/styles/product_lp_thumb/public/greek-yogurt-protein-smoothie-6533.jpg?itok=ZkO5Ap_j" class="card-img-top">
-                        <div class="card-body">
-                        <h5 class="card-title">WHEY PROTEIN SMOOTHIE</h5>
-                        <p class="card-text">$19.00</p>
-                        <button class="btn btn-success">Buy now</button>
-                        </div>
-                     </div>
-                 </slide>
-                 <slide>
-                      <div class="card">
-                        <img src="https://www.optimumnutrition.com/sites/g/files/mrktmf206/files/styles/product_lp_thumb/public/ON_Protein-Ridges_Website_SourCream_sized.jpg?itok=ySQSt4WM" class="card-img-top">
-                        <div class="card-body">
-                        <h5 class="card-title">WHEY PROTEIN RIDGE</h5>
-                        <p class="card-text">$19.00</p>
-                        <button class="btn btn-success">Buy now</button>
-                        </div>
-                     </div>
-                 </slide>
-                 <slide>
-                      <div class="card">
-                        <img src="https://www.optimumnutrition.com/sites/g/files/mrktmf206/files/styles/product_lp_thumb/public/protein-water-6322.jpg?itok=8zzKOhlN" class="card-img-top">
-                        <div class="card-body">
-                        <h5 class="card-title">PROTEIN WATER</h5>
-                        <p class="card-text">$39.00</p>
-                        <button class="btn btn-success">Buy now</button>
-                        </div>
-                     </div>
-                 </slide>
-                </carousel>
+                
+             </carousel>
             
               
              
@@ -110,21 +42,27 @@
 
 <script>
 import { Carousel, Slide } from 'vue-carousel';
-
+import {fs} from '../firebase'
 export default {
     name:'productssection',
+    firestore(){
+        return{
+            Products:fs.collection('Products')
+        }
+    },
+    data(){
+        return{
+            Products:[]
+        }   
+    },
     components:{
           Carousel,
-          Slide
+          Slide,
+          
     }
 }
 </script>
 
 <style>
-.products-container{
-    /* display:grid;
-    grid-template-columns: repeat(3,1fr);
-    grid-gap:1rem; */
-}
 
 </style>

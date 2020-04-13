@@ -11,7 +11,28 @@
               <img src="../assets/ordersvg.svg" alt="">
             </div>
          </div>
+         
+         <div class="orders-table">
+      
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">First</th>
+                  <th scope="col">Last</th>
+                  <th scope="col">Handle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                 
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+              </tbody>
+            </table>
 
+         </div>
 
      </div>
   </div>

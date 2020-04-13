@@ -75,7 +75,13 @@ Vue.use(VueFirestore,{
   enumerable: true  //  whether it is enumerable or not. Default is true.
 })
 
+// Vue2 Filters Plugin
+import Vue2Filters from 'vue2-filters'
+ 
+Vue.use(Vue2Filters);
+
 Vue.component('navbarcomponent',require('./components/navBar.vue').default);
+Vue.component('addToCart',require('./components/addToCart.vue').default);
 
 
 new Vue({
